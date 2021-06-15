@@ -1,18 +1,10 @@
 const express = require('express');
+const morgan = require('morgan');
+
 const app = express();
 
 // middlewares
-app.use((req, res, next) => {
-    console.log('미들웨어 1 을 통과하고 있습니다.');
-    next();
-});
-
-app.use((req, res, next) => {
-    console.log('미들웨어 2 를 통과하고 있습니다.');
-    next();
-});
-
-
+app.use(morgan('tiny'));
 
 app.get('/', (req, res) => {
     res.json('홈입니다.');
