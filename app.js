@@ -8,7 +8,7 @@ const app = express();
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 
-app.get('/posts', (req, res) => {
+app.get('/products', (req, res) => {
     const dataFromDB = [
         {
             userId: 1,
@@ -31,7 +31,7 @@ app.get('/posts', (req, res) => {
     ];
     res.json(dataFromDB);
 });
-app.get('/posts/:id', (req, res) => {
+app.get('/products/:id', (req, res) => {
     if (req.params.id === '1') {
         res.json({
             userId: 1,
@@ -57,16 +57,22 @@ app.get('/posts/:id', (req, res) => {
         res.json('error...');
     }
 });
-
-app.post('/posts', (req, res) => {
+app.post('/products', (req, res) => {
     const fromFrontend = req.body;
 
     res.json(fromFrontend);
 });
+app.put('/products', (req, res) => {
+    const fromFrontend = req.body;
 
+    res.json(fromFrontend);
+});
+app.delete('/products/:id', (req, res) => {
+    res.json(req.params.id + '번 글 삭제');
+});
 app.get('*', (req, res) => {
     res.send('잘못된 경로입니다.');
-})
+});
 app.listen(3000, () => {
     console.log('server ready on port 3000...');
 });
