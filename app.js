@@ -1,10 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const app = express();
 
 // middlewares
 app.use(morgan('tiny'));
+app.use(bodyParser.json());
 
 app.get('/posts', (req, res) => {
     const dataFromDB = [
@@ -54,6 +56,12 @@ app.get('/posts/:id', (req, res) => {
     } else {
         res.json('error...');
     }
+});
+
+app.post('/posts', (req, res) => {
+    const fromFrontend = req.body;
+
+    res.json(fromFrontend);
 });
 
 app.get('*', (req, res) => {
